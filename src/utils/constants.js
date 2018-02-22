@@ -1,0 +1,2 @@
+export const fakeAvatar = 'https://vignette.wikia.nocookie.net/degrassi/images/8/8b/Jon-Snow-S3.jpg/revision/latest?cb=20140407015951'
+export const fakeImage = 'https://cdn.movieweb.com/img.news.tops/NEp85KelUTCjsw_1_a/Game-Of-Thrones-Star-Rose-Leslie-Joins-Vin.jpg'
