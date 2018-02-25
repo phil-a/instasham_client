@@ -1,17 +1,56 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import {  FlatList,
+          View,
+          ActivityIndicator,
+          RefreshControl,
+          StyleSheet,
+        } from 'react-native';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+
 import { PhotoCard } from '../../components';
 
+const styles = StyleSheet.create({
+  loadingWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+})
+
 class FeedsScreen extends Component {
-  state = { }
+  state = {
+    isRefreshing: false,
+  };
+
+  _keyExtractor = (item) => item.id
+  _renderItem = ({ item }) => <PhotoCard data={item} />
+  _refreshRequest = async () => {
+    this.setState({ isRefreshing: true })
+    await this.props.data.refetch()
+    this.setState({ isRefreshing: false })
+  }
   render() {
-    console.log('props', this.props)
+    if (this.props.data.loading) {
+      return (
+        <View style={styles.loadingWrapper}>
+          <ActivityIndicator size="large" />
+        </View>
+      )
+    }
+
     return (
-      <View>
-        <PhotoCard />
-      </View>
+      <FlatList
+        data={this.props.data.photos}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+        refreshControl = {
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this._refreshRequest}
+          />
+        }
+      />
     );
   }
 }

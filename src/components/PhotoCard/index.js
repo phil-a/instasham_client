@@ -11,8 +11,7 @@ import CommentInput from '../CommentInput';
 
 const styles = StyleSheet.create({
   root: {
-    minHeight: 800,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   img: {
     flex: 1,
@@ -44,9 +43,12 @@ class PhotoCard extends Component {
     return (
       <ScrollView style={styles.root}>
         <Header />
-        <Image style={styles.img} source={{ uri: fakeImage }}/>
+        <Image
+          style={styles.img}
+          source={{ uri: this.props.data.imageUrl }}
+        />
         <ActionButtons />
-        <Meta />
+        <Meta caption={this.props.data.caption} />
         <View style={styles.commentsWrapper}>
           <Touchable feedback="opacity">
             <Text style={styles.commentViewAll}>View all 13 comments</Text>

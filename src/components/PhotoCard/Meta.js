@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 export default function Meta({
   username = 'Jon Snow',
-  caption = 'this is my beautiful girl',
+  caption,
 }) {
   return (
     <View style={styles.root}>
@@ -29,7 +29,7 @@ export default function Meta({
         </Text>
       </View>
       <View style={styles.wrapper}>
-        <Text style={styles.text}>
+        <Text numberOfLines={2} style={styles.text}>
           <Text style={systemWeights.regular}>{username}</Text> {caption}
         </Text>
       </View>
